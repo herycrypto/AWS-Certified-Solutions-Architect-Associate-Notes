@@ -115,3 +115,24 @@ AWS Certified Solutions Architect Associate Exam Notes
 
 
 
+## Important Topics
+
+https://jayendrapatil.com/aws-global-vs-regional-vs-az-resources/
+
+- S3: Global but Data is Regional
+- EC2: Region
+- VPC: Region
+- ASG: Region
+- RDS: Region
+- EBS Snapshot: Region
+- SQS: Region
+- ELB: Region
+- CloudFront: Global
+- IAM: Global
+- DynamoDB: Regional
+- Lambda: Regional
+- Route53: Global
+- EC Instances / EBS Volumes: Availability Zone
+- Cluster Placement Groups – Availability Zone
+
+
