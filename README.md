@@ -150,4 +150,20 @@ Instances in standby state are still managed by Auto Scaling, are charged as nor
 Aurora Global Database uses storage-based replication with typical latency of less than 1 second, using dedicated infrastructure that leaves your database fully available to serve application workloads. In the unlikely event of a regional degradation or outage, one of the secondary regions can be promoted to full read/write capabilities in less than 1 minute.
 **INCORRECT**: “Create a cross-region Aurora Read Replica” is incorrect. This solution would not provide the fast storage replication and fast failover capabilities of the Aurora Global Database and is therefore not the best option.
 
+5) Amazon FSx for Windows File Server provides fully managed, highly reliable file storage that is accessible over the industry-standard Server Message Block (SMB) protocol. It is built on Windows Server, delivering a wide range of administrative features such as user quotas, end-user file restore, and Microsoft Active Directory (AD) integration. It offers single-AZ and multi-AZ deployment options, fully managed backups, and encryption of data at rest and in transit.
+**INCORRECT**: “Migrate the file share to Amazon Elastic File System (Amazon EFS)” is incorrect as you cannot use Windows instances with Amazon EFS.
 
+6) What steps should a Solutions Architect take to ensure that each user can access their own home folder and no one else’s? (Select TWO.)
+**CORRECT**: “Create an IAM policy that applies folder-level permissions” is a correct answer.
+**CORRECT**: “Create an IAM group and attach the IAM policy, add IAM users to the group” is also a correct answer.
+
+7) There are two possible solutions here. In one you create a new IAM role with multiple policies, in the other you add a new policy to the existing IAM role. Contrary to one of the incorrect answers, you can modify IAM roles after an instance has been launched – this was changed quite some time ago now. However, you cannot add multiple IAM roles to a single EC2 instance. If you need to attach multiple policies you must attach them to a single IAM role. There is no such thing as delegating access using the API Gateway management console.
+**CORRECT**: “Add an IAM policy to the existing IAM role that the EC2 instance is using granting permissions to access Amazon API Gateway” is the correct answer.
+**CORRECT**: “Create a new IAM role with multiple IAM policies attached that grants access to Amazon S3 and Amazon API Gateway, and replace the existing IAM role that is attached to the EC2 instance” is the correct answer.
+**INCORRECT**: “Create an IAM role with a policy granting permissions to Amazon API Gateway and add it to the EC2 instance as an additional IAM role” is incorrect as you cannot attach an additional IAM role, you can only have one attached to an instance at a time.
+
+8) An Amazon CloudWatch alarm recently notified a Solutions Architect that the load on an Amazon DynamoDB table is getting close to the provisioned capacity for writes. The DynamoDB table is part of a two-tier customer-facing application and is configured using provisioned capacity.
+What will happen if the limit for the provisioned capacity for writes is reached?
+
+Amazon DynamoDB can throttle requests that exceed the provisioned throughput for a table. When a request is throttled it fails with an HTTP 400 code (Bad Request) and a ProvisionedThroughputExceeded exception (not a 503 or 200 status code). When using the provisioned capacity pricing model DynamoDB does not automatically scale. DynamoDB can automatically scale when using the new on-demand capacity mode, however this is not configured for this database.
+**CORRECT**: “The requests will be throttled, and fail with an HTTP 400 code (Bad Request) and a ProvisionedThroughputExceededException” is the correct answer.
